@@ -16,35 +16,26 @@ GROUP BY f.faculty_name
 having f.faculty_name ="Cong Nghe Sinh Hoc";
 
 -- câu 4 Đưa ra danh sách gồm mã số, họ tên và tuổi của các sinh viên khoa ‘TOAN’
-select student.student_id, student.student_name,
-year(curdate()) - student.date_of_birth age
-from student
-join faculty on faculty.faculty_id = student.faculty_id
-where faculty.faculty_name ='TOAN';
+select s.student_id, s.student_name,
+year(curdate()) - s.date_of_birth age
+from student s
+join faculty f on f.faculty_id = s.faculty_id
+where f.faculty_name ='TOAN';
 -- câu 5 
-select count(faculty.faculty_name) SGV from instructor
-join faculty  on instructor.faculty_id = faculty.faculty_id
-group by faculty.faculty_name
-having faculty.faculty_name = 'Cong nghe Sinh hoc';
+select count(f.faculty_name) SGV from instructor i
+join faculty f  on i.faculty_id = f.faculty_id
+group by f.faculty_name
+having f.faculty_name = 'Cong nghe Sinh hoc';
 -- câu 6 
-select * from student
-where not exists(SELECT instructor_student.student_id FROM instructor_student where student.student_id = instructor_student.student_id);
+select * from student s
+where not exists(SELECT i.student_id FROM instructor_student i where s.student_id = i.student_id);
 -- câu 7 Đưa ra mã khoa, tên khoa và số giảng viên của mỗi khoa	
-SELECT faculty.faculty_id,faculty.faculty_name, COUNT(faculty.faculty_id) So_GV
-FROM instructor JOIN faculty
-ON instructor.faculty_id = faculty.faculty_id
-GROUP BY faculty.faculty_id;
+SELECT f.faculty_id,f.faculty_name, COUNT(f.faculty_id) So_GV
+FROM instructor i JOIN faculty f
+ON i.faculty_id = f.faculty_id
+GROUP BY f.faculty_id;
 -- câu 8 Cho biết số điện thoại của khoa mà sinh viên có tên ‘Le van son’ đang theo học
-SELECT faculty.faculty_name, faculty.phone
-FROM faculty join student
-ON faculty.faculty_id = student.faculty_id
-WHERE student.student_name = 'Le Van Son'
-
-
-
-
-
-
-
-
-
+SELECT f.faculty_name, f.phone
+FROM faculty f join student s
+ON f.faculty_id = s.faculty_id
+WHERE s.student_name = 'Le Van Son'
