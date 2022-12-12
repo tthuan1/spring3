@@ -22,7 +22,7 @@ from student s
 join faculty f on f.faculty_id = s.faculty_id
 where f.faculty_name ='TOAN';
 -- câu 5 
-select count(f.faculty_name) SGV from instructor i
+select count(f.faculty_name) so_luong_giao_vien from instructor i
 join faculty f  on i.faculty_id = f.faculty_id
 group by f.faculty_name
 having f.faculty_name = 'Cong nghe Sinh hoc';
