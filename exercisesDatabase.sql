@@ -21,12 +21,12 @@ year(curdate()) - s.date_of_birth age
 from student s
 join faculty f on f.faculty_id = s.faculty_id
 where f.faculty_name ='TOAN';
--- câu 5 
+-- câu 5 Cho biết số giảng viên của khoa ‘CONG NGHE SINH HOC’
 select count(f.faculty_name) so_luong_giao_vien from instructor i
 join faculty f  on i.faculty_id = f.faculty_id
 group by f.faculty_name
 having f.faculty_name = 'Cong nghe Sinh hoc';
--- câu 6 
+-- câu 6 Cho biết thông tin về sinh viên không tham gia thực tập
 select * from student s
 where not exists(SELECT i.student_id FROM instructor_student i where s.student_id = i.student_id);
 -- câu 7 Đưa ra mã khoa, tên khoa và số giảng viên của mỗi khoa	
